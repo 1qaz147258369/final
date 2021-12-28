@@ -111,10 +111,6 @@ app.post('/doReg', (req, res) => {
 //     else next()
 // })
 
-app.get('/logOut', (req, res) => { //退出
-    req.session.username = ""
-    res.render("login.ejs", {info: null})
-})
 
 app.get("/userInfo", (req, res) => {
     var user = req.session.user

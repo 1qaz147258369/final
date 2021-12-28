@@ -12,6 +12,8 @@ var ObjectId = require('mongodb').ObjectId
 const { ServerResponse } = require('http')
 const { callbackify } = require('util')
 const { Serializer } = require('v8')
+const multipart = require('connect-multiparty')
+
 
 const port = 10514
 
@@ -103,11 +105,11 @@ app.post('/doReg', (req, res) => {
     })
 })
 
-app.use((req, res, next) => {
-    var user = req.session.user
-    if(user == null) res.render('login.ejs', {info: null})
-    else next()
-})
+// app.use((req, res, next) => {
+//     var user = req.session.user
+//     if(user == null) res.render('login.ejs', {info: null})
+//     else next()
+// })
 
 app.get('/logOut', (req, res) => { //退出
     req.session.username = ""

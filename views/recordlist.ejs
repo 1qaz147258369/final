@@ -32,14 +32,15 @@
 							</thead>
 							<tbody>
 
-								<% for(var i=0;i< recordlist.length; i++){ %>
+								<% for(var i=0;i< list.length; i++){ %>
 									<tr>
 										<th scope="row"><%=i%>%></th>
-										<td><%=recordlist[i].snoe%></td>
-										<td><%=recordlist[i].username%></td>
-										<td><%=recordlist[i].building%></td>
-										<td><%=recordlist[i].date%></td>
-										<td><%=recordlist[i].detail%></td>
+										<td><%=list[i].sno%></td>
+										<td><%=list[i].username%></td>
+										<td><%=list[i].building%></td>
+										<td><%=list[i].room%></td>
+										<td><%=list[i].date%></td>
+										<td><%=list[i].detail%></td>
 										<td>
 											<a type="button" class="btn btn-danger" href="RestoreUser?_id=<%={list[i]._id%>">删除缺勤</a>
 										</td>

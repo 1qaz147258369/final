@@ -118,24 +118,61 @@ app.post('/doReg', multipartyMiddleware,(req, res) => {
 
 //展现学生列表
 app.get("/userlist",(req,res) => {
-    Service.stu.find({"sno":req.session.sno},(err,stu)=>{
+    Service.User.find({"sno":req.session.sno},(err,stu)=>{
         if(err){
             console.log(err);
             return;
         }
         for(var i=0;i<stu.length;i++){
-            slist[i].username=req.session.username
-            slist[i].sex=req.session.sex
-            slist[i].sno=req.session.sno
-            slist[i].building=req.session.building
-            slist[i].room=req.session.room
+            stu[i].username=req.session.username
+            stu[i].sex=req.session.sex
+            stu[i].sno=req.session.sno
+            stu[i].building=req.session.building
+            v[i].room=req.session.room
         }
-        res.render("userlist.ejs",{info:req.session.username,slist:stu})
+        res.render("userlist.ejs",{info:req.session.username,list:stu})
     })
 })
 
-//添加信息
+//添加信息,展示缺寝列表  
+app.get('/addque.ejs', (req, res) => { 
+    res.render('addque.ejs', {info: null})
+})
 
+app.post('/add', multipartyMiddleware,(req, res) => {
+    var username = req.body.username
+    var date = req.body.date
+    var detail = req.body.detail
+    var sno=req.body.sno
+    var building=req.body.building
+    var room=req.body.room
+
+    Service.Record.find({"username": username}, (err, user) => {
+        if(user.length == 0) {
+            Service.InsertRecord(sno,username,building,room,date,detail)
+            res.render("addque.ejs")
+        }
+        
+    })
+})
+
+app.get("recordlist",(req,res) => {
+    Service.Record.find({"sno":req.session.sno},(err,rec)=>{
+        if(err){
+            console.log(err);
+            return;
+        }
+        for(var i=0;i<rec.length;i++){
+            rec[i].username=req.session.username
+            rec[i].date=req.session.date
+            rec[i].sno=req.session.sno
+            rec[i].building=req.session.building
+            rec[i].room=req.session.room
+            rec[i].detail=req.session.detail
+        }
+        res.render("userlist.ejs",{info:req.session.username,list:rec})
+    })
+})
 //删除信息
 
 //查看用户信息

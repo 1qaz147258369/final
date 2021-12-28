@@ -33,24 +33,22 @@
 									<th scope="col">寝室号</th>
 									<th scope="col">日期</th>
 									<th scope="col">备注</th>
-									<th scope="col">操作</th>
+									
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${recordList}" var="record" varStatus="i">
+								<% for(var i=0;i< recordlist.length; i++){ %>
 									<tr>
-										<th scope="row">${i.count}</th>
-										<td>${record.sno}</td>
-										<td>${record.username}</td>
-										<td>${record.building}</td>
-										<td>${record.room}</td>
-										<td>${record.date}</td>
-										<td>${record.detail}</td>
-										<td>
-											<a type="button" class="btn btn-primary" href="asnoInfo?asno=${ record.asno}">详情</a>
-										</td>
+										<th scope="row"><%=i%>%></th>
+										<td><%=recordlist[i].snoe%></td>
+										<td><%=recordlist[i].username%></td>
+										<td><%=recordlist[i].building%></td>
+										<td><%=recordlist[i].date%></td>
+										<td><%=recordlist[i].detail%></td>
+
 									</tr>
-								</c:forEach>
+								<%}%>
+								
 							</tbody>
 						</table>
 					</div>

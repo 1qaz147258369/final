@@ -31,19 +31,21 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${userList}" var="user" varStatus="i">
+								<% for(var i=0;i< userlist.length; i++){ %>
 									<tr>
-										<th scope="row">${i.count}</th>
-										<td>${user.username}</td>
-										<td>${user.sex}</td>
-										<td>${user.sno}</td>
-										<td>${user.building}</td>
-										<td>${user.room}</td>
+										<th scope="row"><%=i%>%></th>
+										<td><%=userlist[i].username%></td>
+										<td><%=userlist[i].sex%></td>
+										<td><%=userlist[i].sno%></td>
+										<td><%=userlist[i].building%></td>
+										<td><%=userlist[i].room%></td>
 										<td>
 											<a type="button" class="btn btn-primary" href="addque.ejs">添加缺勤</a>
 										</td>
 									</tr>
-								</c:forEach>
+								<%}%>
+									
+		
 							</tbody>
 						</table>
 					</div>

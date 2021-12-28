@@ -1,22 +1,19 @@
 const express = require('express')
 const app = express()
-const fs = require('fs')
 const bodyParser = require('body-parser')
+const multipart = require('connect-multiparty')
 const cookieParser = require('cookie-parser')
 const session = require('express-session')
 const multer  = require('multer')
-const path  = require('path')
 const Service = require("./modules/service.js")
 const async = require('async');
-var ObjectId = require('mongodb').ObjectId
-const { ServerResponse } = require('http')
-const { callbackify } = require('util')
-const { Serializer } = require('v8')
-const multipart = require('connect-multiparty')
+const multipartyMiddleware=multipart()
 
 
 const port = 10514
 
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json())
 app.use(express.static('node_modules'))
 
 app.get('/', (req, res) => {
@@ -26,15 +23,16 @@ app.get('/', (req, res) => {
 app.get('/index.ejs', (req, res) => { //首页
     res.render('index.ejs', {info: null})
 })
-
-app.get('/a_reg.ejs', (req, res) => { //宿管注册
+//有关宿管注册
+app.get('/a_reg.ejs', (req, res) => { 
     res.render('a_reg.ejs', {info: null})
 })
 
-app.post('/a_Reg', (req, res) => {
+app.post('/a_Reg', multipartyMiddleware,(req, res) => {
     var username = req.body.username
-    var password = req.body.assword
+    var password = req.body.password
     var sex = req.body.sex
+    var ano=req.body.ano
     var sno=req.body.sno
     var building=req.body.building
 
@@ -43,7 +41,7 @@ app.post('/a_Reg', (req, res) => {
     
     Service.User.find({"username": username}, (err, user) => {
         if(user.length == 0) {
-            Service.InsertUser(username, password, sex, sno, building)
+            Service.InsertUser(sno, ano,username, password, sex, building)
             res.render("login.ejs", {info: "注册成功！"})
         }
         else {
@@ -52,11 +50,11 @@ app.post('/a_Reg', (req, res) => {
     })
 })
 
-app.get('/a_index.ejs', (req, res) => { //首页 
+app.get('/a_index.ejs', (req, res) => { //宿管首页 
     res.render('a_index.ejs', {info: null})
 })
 
-app.get('/s_index.ejs', (req, res) => { //首页
+app.get('/s_index.ejs', (req, res) => { //学生首页
     res.render('s_index.ejs', {info: null})
 })
 
@@ -78,16 +76,17 @@ app.post('/doLogin', (req, res) => {
     })
 })
 
-//有关注册
+//有关学生注册
 app.get('/reg.ejs', (req, res) => { 
     res.render('reg.ejs', {info: null})
 })
 
-app.post('/doReg', (req, res) => {
+app.post('/doReg', multipartyMiddleware,(req, res) => {
     var username = req.body.username
-    var password = req.body.assword
+    var password = req.body.password
     var sex = req.body.sex
     var sno=req.body.sno
+    var ano=req.body.ano
     var building=req.body.building
     var room=req.body.room
 
@@ -96,7 +95,7 @@ app.post('/doReg', (req, res) => {
     
     Service.User.find({"username": username}, (err, user) => {
         if(user.length == 0) {
-            Service.InsertUser(username, password, sex, sno, building,room)
+            Service.InsertUser(sno, ano,username, password, sex, building,room)
             res.render("login.ejs", {info: "注册成功！"})
         }
         else {
@@ -105,25 +104,31 @@ app.post('/doReg', (req, res) => {
     })
 })
 
-// app.use((req, res, next) => {
-//     var user = req.session.user
-//     if(user == null) res.render('login.ejs', {info: null})
-//     else next()
-// })
-
-
-app.get("/userInfo", (req, res) => {
-    var user = req.session.user
-    var username = req.query.username
-    Service.User.findOne({"username": username}, (err, lookUser) =>{
-        if(err) return console.log(err)
-        res.render("userInfo.ejs", {
-            user: user,
-            lookUser: lookUser
-        })
+//展现学生列表
+app.get("/userlist",(req,res) => {
+    Service.stu.find({"sno":req.session.sno},(err,stu)=>{
+        if(err){
+            console.log(err);
+            return;
+        }
+        for(var i=0;i<stu.length;i++){
+            slist[i].username=req.session.username
+            slist[i].sex=req.session.sex
+            slist[i].sno=req.session.sno
+            slist[i].building=req.session.building
+            slist[i].room=req.session.room
+        }
+        res.render("userlist.ejs",{info:req.session.username,slist:stu})
     })
 })
 
+//添加信息
+
+//删除信息
+
+//查看用户信息
+
+//查找用户
 app.get("/searchUser", (req, res) => {
     var user = req.session.user
     var search = req.query.search
@@ -137,6 +142,20 @@ app.get("/searchUser", (req, res) => {
         })
     })
 })
+
+app.get("/userInfo", (req, res) => {
+    var user = req.session.user
+    var username = req.query.username
+    Service.User.findOne({"username": username}, (err, lookUser) =>{
+        if(err) return console.log(err)
+        res.render("userInfo.ejs", {
+            user: user,
+            lookUser: lookUser
+        })
+    })
+})
+
+
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)

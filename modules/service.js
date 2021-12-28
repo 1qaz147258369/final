@@ -2,9 +2,10 @@ const User = require("./user")
 const Record=require("./record")
 
 //在user表中插入数据
-function InsertUser(sno, username, password, sex, building,room) {
+function InsertUser(sno, ano,username, password, sex, building,room) {
     var user = new User({
         sno:sno,
+        ano:ano,
         username:username,
         password:password,
         sex:sex,

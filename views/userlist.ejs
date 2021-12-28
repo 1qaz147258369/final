@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+<%-include('link.ejs')%>
+</head>
+<body>
+
+	<div class="container">
+		<%-include('top.ejs')%>
+
+		<div class="row" style="margin-top: 10px">
+			<%-include('a_lf.ejs')%>
+			<div class="col-lg-10">
+
+				<div class="card">
+					<div class="card-header">学生列表</div>
+					<div class="card-body">
+						<table class="table">
+							<thead>
+								<tr>
+									<th scope="col">序号</th>
+									<th scope="col">姓名</th>
+									<th scope="col">性别</th>
+									<th scope="col">学院</th>
+									<th scope="col">学号</th>
+									<th scope="col">寝室楼栋</th>
+									<th scope="col">寝室号</th>
+									<th scope="col">操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${userList}" var="user" varStatus="i">
+									<tr>
+										<th scope="row">${i.count}</th>
+										<td>${user.username}</td>
+										<td>${user.sex}</td>
+										<td>${user.sno}</td>
+										<td>${user.building}</td>
+										<td>${user.room}</td>
+										<td>
+											<a type="button" class="btn btn-primary" href="addque.ejs">添加缺勤</a>
+										</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</div>
+					<nav aria-label="Page navigation example">
+						<ul class="pagination">
+							<li class="page-item"><a class="page-link" href="#">上一页</a></li>
+							<li class="page-item"><a class="page-link" href="#">1</a></li>
+							<li class="page-item"><a class="page-link" href="#">2</a></li>
+							<li class="page-item"><a class="page-link" href="#">3</a></li>
+							<li class="page-item"><a class="page-link" href="#">下一页</a></li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

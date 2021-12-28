@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+<%-include('link.ejs')%>
+</head>
+<body>
+
+	<div class="container">
+		<%-include('top.ejs')%>
+
+		<div class="row" style="margin-top: 10px">
+			<%-include('a_lf.ejs')%>
+
+			<div class="col-lg-10">
+
+				<div class="card">
+					<div class="card-header">添加缺寝</div>
+					<div class="card-body">
+						<form method="post" action="Querecord" >
+						<div class="form-group row">
+								<label for="inputPassword3" class="col-sm-1 col-form-label">日期</label>
+								<div class="col-sm-3">
+									<input type="date" name="date" class="form-control"
+										id="inputPassword3" placeholder="日期" value="2021-06-16">
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="form-group col-md-6">
+									<label for="inputEmail4">学号</label> 
+									<input type="text" class="form-control" id="inputEmail4" name="sno" placeholder="学号">
+								</div>
+								<div class="form-group col-md-6">
+									<label for="inputEmail4">姓名</label> 
+									<input type="text" class="form-control" id="inputEmail4" name="name" placeholder="姓名">
+								</div>
+								<div class="form-group col-md-6">
+									<label for="inputEmail4">寝室楼栋</label> 
+									<input type="text" class="form-control" id="inputEmail4" name="building" placeholder="寝室楼栋">
+								</div>
+								<div class="form-group col-md-6">
+									<label for="inputEmail4">寝室号</label> 
+									<input type="text" class="form-control" id="inputEmail4" name="room" placeholder="寝室号">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="inputAddress2">缺寝备注</label> 
+								<input type="text" class="form-control" id="inputAddress2" name="detail" placeholder="缺勤备注">
+							</div>
+							<button type="submit" class="btn btn-primary">提交</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

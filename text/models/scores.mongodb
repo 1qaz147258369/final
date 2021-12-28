@@ -1,0 +1,22 @@
+// MongoDB Playground
+// To disable this template go to Settings | MongoDB | Use Default Template For Playground.
+// Make sure you are connected to enable completions and to be able to run a playground.
+// Use Ctrl+Space inside a snippet or a string literal to trigger completions.
+
+// Select the database to use.
+use('190110910514');
+
+// The drop() command destroys all data from a collection.
+// Make sure you run it against the correct database and collection.
+db.scores.drop();
+
+// Insert a few documents into the sales collection.
+db.scores.insertMany([
+  { '_id': 1, 'Sno':111, 'Sname':'张三', 'Python':85, 'nodejs':86,'Java':78, 'system_safety':80 },
+  { '_id': 2, 'Sno':222, 'Sname':'李四', 'Python':80, 'nodejs':91,'Java':82, 'system_safety':85 },
+  { '_id': 3, 'Sno':333, 'Sname':'王五', 'Python':83, 'nodejs':85,'Java':80, 'system_safety':87 },
+  { '_id': 4, 'Sno':444, 'Sname':'赵六', 'Python':78, 'nodejs':80,'Java':88, 'system_safety':85 },
+  { '_id': 5, 'Sno':555, 'Sname':'甲一', 'Python':90, 'nodejs':93,'Java':90, 'system_safety':88 },
+
+]);
+

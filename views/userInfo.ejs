@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+<%-include('link.ejs')%>
+</head>
+<body>
+
+	<div class="container">
+		<%-include('top.ejs')%>
+
+		<div class="row" style="margin-top: 10px">
+			<div class="col-lg-2">
+				<div class="list-group">
+					<a href="a_index.ejs" class="list-group-item list-group-item-action">首页</a>
+					<a href="AllUser" class="list-group-item list-group-item-action">学生管理</a>
+					<a href="Allrecordlist" class="list-group-item list-group-item-action">缺寝管理</a>
+					<a href="MyInfo" class="list-group-item list-group-item-action">我的信息</a> 
+				</div>
+			</div>
+
+			<div class="col-lg-6">
+
+				<div class="card">
+					<div class="card-header">用户信息</div>
+					<div class="card-body">
+						<div>
+							<h2>用户信息如下：</h2>
+							<div class="row">
+								<div class="col-lg-6">
+									<p>工号：${user.sno}</p>
+									<p>用户名：${user.username}</p>								
+									<p>性别：${user.sex}</p>
+									<p>寝室楼栋：${user.building}</p>
+
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</body>
+</html>

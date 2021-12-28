@@ -2,10 +2,11 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 const multipart = require('connect-multiparty')
+const Service = require("./modules/service.js")
 const cookieParser = require('cookie-parser')
 const session = require('express-session')
 const multer  = require('multer')
-const Service = require("./modules/service.js")
+
 const async = require('async');
 const multipartyMiddleware=multipart()
 
@@ -15,6 +16,17 @@ const port = 10514
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(express.static('node_modules'))
+
+app.use(session({
+    secret: 'this is a session', //服务器生成session签名
+    name: 'username',
+    resave: false, //强制保存session即使他没有变化
+    saveUninitialized: true, //强制保存未初始化的session
+    cookie: {
+        maxAge: 1000 * 60 * 15
+    },
+    rolling: true
+}))
 
 app.get('/', (req, res) => {
     res.render('index.ejs', {info: null})

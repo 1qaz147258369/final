@@ -14,14 +14,15 @@
 			<div class="col-lg-2">
 				<div class="list-group">
 					<a href="s_index.ejs"class="list-group-item list-group-item-action">首页</a> 
-					<a href="snamerecord" class="list-group-item list-group-item-action">缺寝记录</a> 
-					<a href="s_MyInfo" class="list-group-item list-group-item-action">我的信息</a> 
+					<a href="/srecord" class="list-group-item list-group-item-action">缺寝记录</a> 
+					<a href="/sInfo" class="list-group-item list-group-item-action">我的信息</a> 
+					<a href="/logOut" class="list-group-item list-group-item-action">退出</a>
 				</div>
 			</div>
 			<div class="col-lg-10">
 
 				<div class="card">
-					<div class="card-header">缺勤列表</div>
+					<div class="card-header">我的记录</div>
 					<div class="card-body">
 						<table class="table">
 							<thead>
@@ -37,15 +38,16 @@
 								</tr>
 							</thead>
 							<tbody>
-								<% for(var i=0;i< recordlist.length; i++){ %>
+								<% for(var i=0;i< list.length; i++){ %>
 									<tr>
 										<th scope="row"><%=i%>%></th>
-										<td><%=recordlist[i].snoe%></td>
-										<td><%=recordlist[i].username%></td>
-										<td><%=recordlist[i].building%></td>
-										<td><%=recordlist[i].date%></td>
-										<td><%=recordlist[i].detail%></td>
-
+										<td><%=list[i].sno%></td>
+										<td><%=list[i].username%></td>
+										<td><%=list[i].building%></td>
+										<td><%=list[i].room%></td>
+										<td><%=list[i].date%></td>
+										<td><%=list[i].detail%></td>
+										
 									</tr>
 								<%}%>
 								

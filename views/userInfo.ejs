@@ -12,12 +12,7 @@
 
 		<div class="row" style="margin-top: 10px">
 			<div class="col-lg-2">
-				<div class="list-group">
-					<a href="a_index.ejs" class="list-group-item list-group-item-action">首页</a>
-					<a href="AllUser" class="list-group-item list-group-item-action">学生管理</a>
-					<a href="Allrecordlist" class="list-group-item list-group-item-action">缺寝管理</a>
-					<a href="MyInfo" class="list-group-item list-group-item-action">我的信息</a> 
-				</div>
+				<%-include('a_lf.ejs')%>
 			</div>
 
 			<div class="col-lg-6">
@@ -29,11 +24,9 @@
 							<h2>用户信息如下：</h2>
 							<div class="row">
 								<div class="col-lg-6">
-									<p>工号：<%=lookUser.sno%></p>
-									<p>用户名：<%=lookUser.username%></p>								
-									<p>性别：<%=lookUser.sex%></p>
-									<p>寝室楼栋：<%=lookUser.building%></p>
-
+									<p>工号：<%=tt.ano%></p>
+									<p>用户名：<%=tt.username%></p>								
+									<p>寝室楼栋：<%=tt.building%></p>
 								</div>
 
 							</div>

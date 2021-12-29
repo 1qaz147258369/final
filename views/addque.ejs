@@ -18,6 +18,7 @@
 				<div class="card">
 					<div class="card-header">添加缺寝</div>
 					<div class="card-body">
+						<% if(info) { %><p style="color:red"><%=info%></p><% } %>
 						<form method="post" action="/add" >
 						<div class="form-group row">
 								<label for="inputPassword3" class="col-sm-1 col-form-label">日期</label>

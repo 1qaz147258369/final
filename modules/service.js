@@ -33,15 +33,6 @@ function InsertRecord(sno,username,building,room,date,detail) {
     })
 }
 
-function trans(x) {
-    if(x < 10) x = "0" + x;
-    return x
-}
 
-function GetDate() {
-    var d = new Date()
-    var date = trans(d.getFullYear()) + "-" + trans(d.getMonth()) + "-" + trans(d.getDate())
-    return date
-}
 
-module.exports = {User, Record, InsertUser, InsertRecord,GetDate}
+module.exports = {User, Record, InsertUser, InsertRecord}

@@ -3,15 +3,9 @@ const app = express()
 const bodyParser = require('body-parser')
 const multipart = require('connect-multiparty')
 const Service = require("./modules/service.js")
-const querystring = require('querystring')
-const cookieParser = require('cookie-parser')
 const session = require('express-session')
-const multer  = require('multer')
-const async = require('async');
 const multipartyMiddleware=multipart()
 
-
-const port = 10514
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
@@ -243,24 +237,6 @@ app.get('/srecord', (req, res) => {
             list: rec
         })
     })
-
 })
 
-//查找用户
-app.get('/searchUser', (req, res) => {
-    Service.User.find({ "sno": req.query.sno }, (err, stu) => {
-        if (err) {
-            console.log(err);
-            return;
-        }
-        res.render("userlist.ejs", {
-            info: req.session.username,
-            list: stu
-        })
-    })
-})
-
-
-app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
-})
+app.listen(10514)

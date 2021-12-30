@@ -6,10 +6,10 @@ const Service = require("./modules/service.js")
 const session = require('express-session')
 const multipartyMiddleware=multipart()
 
-
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(express.static('node_modules'))
+
 
 app.use(session({
     secret: 'this is a session', //服务器生成session签名
@@ -187,7 +187,7 @@ app.get('/delrec', (req, res) => {
         console.log('成功');
     });
 
-    Service.Record.find({ "sno":req.query.sno }, (err, rec) => {
+    Service.Record.find({ "building":req.session.building}, (err, rec) => {
         if (err) {
             console.log(err);
             return;
@@ -238,5 +238,6 @@ app.get('/srecord', (req, res) => {
         })
     })
 })
+
 
 app.listen(10514)

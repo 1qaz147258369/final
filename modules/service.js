@@ -34,5 +34,4 @@ function InsertRecord(sno,username,building,room,date,detail) {
 }
 
 
-
 module.exports = {User, Record, InsertUser, InsertRecord}
